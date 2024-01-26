@@ -22,7 +22,7 @@ const BusinessCardSchema = new mongoose.Schema({
   name: String,
   about: String,
   interests: String,
-  phone: Number,
+  phone: String,
   linkedin: String,
   twitter: String,
   facebook: String,
