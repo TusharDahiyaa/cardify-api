@@ -22,7 +22,7 @@ router.post("/signup", async (req, res) => {
       return res.status(411).send({ error: "Invalid inputs" });
     }
 
-    if (validatedBody.password !== validatedBody.repeatPassword) {
+    if (validatedBody.data.password !== validatedBody.data.repeatPassword) {
       return res.status(409).send({ error: "Passwords do not match!" });
     }
 
