@@ -11,6 +11,7 @@ const router = express.Router();
 const userZodSchema = z.object({
   username: z.string().min(3).email(),
   password: z.string().min(6),
+  repeatPassword: z.string().min(6),
 });
 
 router.post("/signup", async (req, res) => {
@@ -20,6 +21,13 @@ router.post("/signup", async (req, res) => {
     if (!validatedBody.success) {
       return res.status(411).send({ error: "Invalid inputs" });
     }
+
+    if (validatedBody.password !== validatedBody.repeatPassword) {
+      return res.status(409).send({ error: "Passwords do not match!" });
+    }
+
+    delete validatedBody.data["repeatPassword"];
+
     // Create a new user from the validated data
     const existingUser = await User.findOne({ username: req.body.username });
     if (existingUser) {

@@ -9,6 +9,7 @@ mongoose.connect(process.env.MONGODBURI).then(() => {
 const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  repeatPassword: String,
   businessCards: [
     {
       type: mongoose.Schema.Types.ObjectId,
